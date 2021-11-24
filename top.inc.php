@@ -39,13 +39,19 @@ if(isset($_SESSION['ADMIN_LOGIN'])  && $_SESSION['ADMIN_LOGIN'] !=''){
                <ul class="nav navbar-nav">
                   <li class="menu-title">Menu</li>
                   <li class="menu-item-has-children dropdown">
-                     <a href="#" > Department Master</a>
+                     <a href="categories.php" > Categories Master Master</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
-                     <a href="#" > Leave Type Master</a>
+                     <a href="product.php" > Product Master</a>
                   </li>
 				  <li class="menu-item-has-children dropdown">
-                     <a href="#" > Employee Master</a>
+                     <a href="#" > Orede Master</a>
+                  </li>
+                  <li class="menu-item-has-children dropdown">
+                     <a href="#" >User Master</a>
+                  </li>
+                  <li class="menu-item-has-children dropdown">
+                     <a href="#" > Contact Us</a>
                   </li>
                </ul>
             </div>
