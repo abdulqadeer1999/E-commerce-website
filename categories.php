@@ -68,13 +68,19 @@ $res = mysqli_query($conn,$sql);
                             <td><?php 
                             
                             if($row['status']==1) {
-                                echo "<a href='?type=status&operation=deactive&id=".$row['id']."'>Active</a>&nbsp";
+                                echo "<span class='badge badge-complete'>
+                                <a href='?type=status&operation=deactive&id=".$row['id']."'>Active</a></span>&nbsp";
                             }else {
-                                echo "<a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a>&nbsp";
+                                echo "<span class='badge badge-pending'>
+                                <a href='?type=status&operation=active&id=".$row['id']."'>Deactive</a></span>&nbsp";
 
                             }
-                            echo "<a href='?type=delete&id=".$row['id']."'>Delete</a>&nbsp";
-                            // echo "<a href='?type=delete&id=".$row['id']."'>Edit</a>&nbsp";
+
+                            echo "<span class='badge badge-edit'>
+                            <a href='manage_categories.php ?id=".$row['id']."'>Edit</a></span>&nbsp";
+                            echo " <span class='badge badge-delete'>
+                            <a href='?type=delete&id=".$row['id']."'>Delete</a></span>&nbsp";
+                            
                             ?>
                             
                         </td> 
