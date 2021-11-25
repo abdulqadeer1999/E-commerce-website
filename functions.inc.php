@@ -18,6 +18,8 @@ function get_safe_value($conn,$str) {
 
     // if we have to update some thing so we can update in this function
     if($str!=''){
+        // it remove space 
+        $str=trim($str);
         return mysqli_real_escape_string($conn,$str);
         }
 }
