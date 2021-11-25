@@ -13,8 +13,8 @@ if(isset($_GET['type']) && $_GET['type']!='') {
         }else {
             $status='0';
         }
-        $update_status="update product set status='$status' where id='$id'";
-        mysqli_query($conn,$update_status);
+        $update_status_sql="update product set status='$status' where id='$id'";
+        mysqli_query($conn,$update_status_sql);
     }
     if($type=='delete') {
         $id=get_safe_value($conn,$_GET['id']);
@@ -26,8 +26,7 @@ if(isset($_GET['type']) && $_GET['type']!='') {
 
 // showing categories data with asc= ascending order 
 $sql = "select product.*,categories.categories from product,categories where
-  product.categories_id=categories.id
-order by product.id desc";
+  product.categories_id=categories.id order by product.id desc";
 
 $res = mysqli_query($conn,$sql);
 
@@ -79,7 +78,8 @@ $res = mysqli_query($conn,$sql);
                             <td><?php echo $row['qty']?></td>
 
 
-                            <td><?php 
+                            <td>
+                                <?php 
                             
                             if($row['status']==1) {
                                 echo "<span class='badge badge-complete'>
