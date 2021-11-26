@@ -48,7 +48,7 @@ if(isset($_SESSION['ADMIN_LOGIN'])  && $_SESSION['ADMIN_LOGIN'] !=''){
                      <a href="#" > Orede Master</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
-                     <a href="#" >User Master</a>
+                     <a href="users.php" >User Master</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
                      <a href="contact_us.php" > Contact Us</a>

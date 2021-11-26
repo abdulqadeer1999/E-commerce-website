@@ -2,7 +2,6 @@
 require('top.inc.php');
 
 // $categories="";
-$msg='';
 $categories_id='';
 $name='';
 $mrp='';
@@ -14,15 +13,19 @@ $description='';
 $meta_title='';
 $meta_desc='';
 $meta_keyword='';
+$msg='';
+
+$image_required='required';
 
 // updating product 
 if(isset($_GET['id']) && $_GET['id'] !='') {
 
+   $image_required='';
    $id=get_safe_value($conn,$_GET['id']);
    $res= mysqli_query($conn,"select * from product where id='$id'");
    $check=mysqli_num_rows($res);
    if($check>0) {
-      mysqli_query($conn,"update product set categories_id='$categories_id',name='$name', mrp='$mrp',price,='$price',qty='$qty',short_desc='$short_desc',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword' where id='$id'");
+      mysqli_query($conn,"update product set categories_id='$categories_id',name='$name', mrp='$mrp',price,='$price',qty='$qty',short_desc='$short_desc',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',image='$image' where id='$id'");
       $row=mysqli_fetch_assoc($res);
       $categories_id=$row['categories_id'];
       $name=$row['name'];
@@ -34,6 +37,7 @@ if(isset($_GET['id']) && $_GET['id'] !='') {
       $meta_title=$row['meta_title'];
       $meta_desc=$row['meta_desc'];
       $meta_keyword=$row['meta_keyword'];
+      
       
    }else {
       header('location:product.php');
@@ -95,15 +99,40 @@ if(isset($_POST['submit'])) {
    //    die();
    //  }
 
+   // if($_FILES['image']['type']!='' || ($_FILES['image']['type']!='png' 
+   // || $_FILES['image']['type']!='jpg' || $_FILES['image']['type']!='jpeg' )) {
+
+   //    $msg="Please select only png,jpg and jpeg image formate";
+   // }
+
    if($msg=="") {
       if(isset($_GET['id']) && $_GET['id'] !='') {
-         mysqli_query($conn,"update product set categories_id='$categories_id',name='$name',
+         if($_FILES['image']['name'] !='') {
+            
+         $image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
+         
+         // move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
+         // dynamic path
+         move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
+
+         $update_sql="update product set categories_id='$categories_id',name='$name',
          mrp='$mrp',price,='$price,',qty='$qty',short_desc='$short_desc',
-         description='$description',meta_title='$meta_title','meta_desc'='$meta_desc','meta_keyword'='$meta_keyword' where id='$id'");
+         description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',image='$image' where id='$id'";
+
+         }else {
+            $update_sql="update product set categories_id='$categories_id',name='$name',
+            mrp='$mrp',price,='$price,',qty='$qty',short_desc='$short_desc',
+            description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword' where id='$id'";
+         }
+
+         mysqli_query($conn,$update_sql);
    
        }else {
-         mysqli_query($conn,"insert into product(categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,status) 
-         values('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword',1)");
+
+         $image=rand(111111111,999999999).'_'.$_FILES['image']['name'];
+         move_uploaded_file($_FILES['image']['tmp_name'],'../media/product/'.$image);
+         mysqli_query($conn,"insert into product(categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,status,image) 
+         values('$categories_id','$name','$mrp','$price','$qty','$short_desc','$description','$meta_title','$meta_desc','$meta_keyword',1,'$image')");
    
        }
         header('location:product.php');
@@ -121,7 +150,7 @@ if(isset($_POST['submit'])) {
                   <div class="col-lg-12">
                      <div class="card">
                         <div class="card-header"><strong>Product</strong><small> Form</small></div>
-                        <form method="post">
+                        <form method="post" enctype="multipart/form-data">
 
                         <div class="card-body card-block">
                            <div class="form-group">
@@ -172,7 +201,7 @@ if(isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                <label for="categories" class="form-control-label">Image</label>
-                               <input type="file" name="image"  class="form-control" required>
+                               <input type="file" name="image"  class="form-control" <?php echo $image_required?>>
                             </div>
                             <div class="form-group">
                                <label for="categories" class="form-control-label">Short Description</label>
