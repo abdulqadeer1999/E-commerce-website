@@ -2,18 +2,18 @@
 require('top.inc.php');
 
 // $categories="";
-$msg="";
-$categories_id="";
-$name="";
-$mrp="";
-$price="";
-$qty="";
-$image="";
-$short_desc="";
-$description="";
-$meta_title="";
-$meta_desc="";
-$meta_keyword="";
+$msg='';
+$categories_id='';
+$name='';
+$mrp='';
+$price='';
+$qty='';
+$image='';
+$short_desc='';
+$description='';
+$meta_title='';
+$meta_desc='';
+$meta_keyword='';
 
 // updating product 
 if(isset($_GET['id']) && $_GET['id'] !='') {
@@ -22,9 +22,7 @@ if(isset($_GET['id']) && $_GET['id'] !='') {
    $res= mysqli_query($conn,"select * from product where id='$id'");
    $check=mysqli_num_rows($res);
    if($check>0) {
-      mysqli_query($conn,"update product set categories_id='$categories_id',name='$name',
-      mrp='$mrp',price,='$price',qty='$qty',short_desc='$short_desc',
-      description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword' where id='$id'");
+      mysqli_query($conn,"update product set categories_id='$categories_id',name='$name', mrp='$mrp',price,='$price',qty='$qty',short_desc='$short_desc',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword' where id='$id'");
       $row=mysqli_fetch_assoc($res);
       $categories_id=$row['categories_id'];
       $name=$row['name'];
@@ -73,6 +71,9 @@ if(isset($_POST['submit'])) {
          $getData=mysqli_fetch_assoc($res);
 
          if($id==$getData['id']) {
+           
+
+         }else {
             $msg= "Product already exist";
 
          }
@@ -96,9 +97,9 @@ if(isset($_POST['submit'])) {
 
    if($msg=="") {
       if(isset($_GET['id']) && $_GET['id'] !='') {
-         mysqli_query($conn,"update product set categories_id='$categories_id',name='$name's,
+         mysqli_query($conn,"update product set categories_id='$categories_id',name='$name',
          mrp='$mrp',price,='$price,',qty='$qty',short_desc='$short_desc',
-         description='$description',meta_title='$meta_title','meta_desc'='$meta_desc','meta_keyword'=''$meta_keyword'' where id='$id'");
+         description='$description',meta_title='$meta_title','meta_desc'='$meta_desc','meta_keyword'='$meta_keyword' where id='$id'");
    
        }else {
          mysqli_query($conn,"insert into product(categories_id,name,mrp,price,qty,short_desc,description,meta_title,meta_desc,meta_keyword,status) 
@@ -133,7 +134,7 @@ if(isset($_POST['submit'])) {
          
 
                                  <?php
-                                 $res=mysqli_query($conn,"select id,categories from categories order by categories asc");
+                                 $res=mysqli_query($conn,"select id, categories from categories order by categories asc");
                                 while($row=mysqli_fetch_assoc($res)){
 
                                  if($row['id']==$categories_id) {
