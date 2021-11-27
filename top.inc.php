@@ -1,19 +1,13 @@
 <?php
 require('connection.inc.php');
 require('functions.inc.php');
-if(isset($_SESSION['ADMIN_LOGIN'])  && $_SESSION['ADMIN_LOGIN'] !=''){
+if(isset($_SESSION['ADMIN_LOGIN']) && $_SESSION['ADMIN_LOGIN']!=''){
 
-}else {
-
-    header('location:login.php');
-    die();
+}else{
+	header('location:login.php');
+	die();
 }
-
-
-
 ?>
-
-
 <!doctype html>
 <html class="no-js" lang="">
    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -39,20 +33,21 @@ if(isset($_SESSION['ADMIN_LOGIN'])  && $_SESSION['ADMIN_LOGIN'] !=''){
                <ul class="nav navbar-nav">
                   <li class="menu-title">Menu</li>
                   <li class="menu-item-has-children dropdown">
-                     <a href="categories.php" > Categories Master Master</a>
+                     <a href="categories.php" > Categories Master</a>
                   </li>
                   <li class="menu-item-has-children dropdown">
                      <a href="product.php" > Product Master</a>
                   </li>
 				  <li class="menu-item-has-children dropdown">
-                     <a href="#" > Orede Master</a>
+                     <a href="#" > Order Master</a>
                   </li>
-                  <li class="menu-item-has-children dropdown">
-                     <a href="users.php" >User Master</a>
+				  <li class="menu-item-has-children dropdown">
+                     <a href="users.php" > User Master</a>
                   </li>
-                  <li class="menu-item-has-children dropdown">
+				  <li class="menu-item-has-children dropdown">
                      <a href="contact_us.php" > Contact Us</a>
                   </li>
+				  
                </ul>
             </div>
          </nav>
@@ -61,8 +56,8 @@ if(isset($_SESSION['ADMIN_LOGIN'])  && $_SESSION['ADMIN_LOGIN'] !=''){
          <header id="header" class="header">
             <div class="top-left">
                <div class="navbar-header">
-                  <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Logo"></a>
-                  <a class="navbar-brand hidden" href="index.html"><img src="images/logo2.png" alt="Logo"></a>
+                  <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="Logo"></a>
+                  <a class="navbar-brand hidden" href="index.php"><img src="images/logo2.png" alt="Logo"></a>
                   <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                </div>
             </div>

@@ -3,9 +3,9 @@
             <div class="footer-inner bg-white">
                <div class="row">
                   <div class="col-sm-6">
-                     Copyright &copy; <?php echo date('Y') ."" ?> Abdul Qadeer Admin
+                     Copyright &copy; <?php echo date('Y')?> Abdul Qadeer
                   </div>
-                 
+                  
                </div>
             </div>
          </footer>

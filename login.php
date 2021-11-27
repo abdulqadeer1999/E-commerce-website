@@ -1,28 +1,24 @@
 <?php
 require('connection.inc.php');
 require('functions.inc.php');
-$msg="";
-if(isset($_POST['submit'])) {
-  $username=get_safe_value($conn,$_POST['username']);
-  $password=get_safe_value($conn,$_POST['password']);
-  $sql = "select * from admin_users where username='$username' and password='$password'";
-  $res=mysqli_query($conn,$sql);
-  // now take count to check that when execute query we retrive data or not
-  $count=mysqli_num_rows($res);
-  if($count>0) {
-
-    $_SESSION['ADMIN_LOGIN'] = 'yes';
-    $_SESSION['ADMIN_USERNAME'] = $username;
-
-    header('location:categories.php');
-    die();
-  }else {
-      $msg ="Please enter correct login details";
-  }
-
+$msg='';
+if(isset($_POST['submit'])){
+	$username=get_safe_value($con,$_POST['username']);
+	$password=get_safe_value($con,$_POST['password']);
+	$sql="select * from admin_users where username='$username' and password='$password'";
+	$res=mysqli_query($con,$sql);
+	$count=mysqli_num_rows($res);
+	if($count>0){
+		$_SESSION['ADMIN_LOGIN']='yes';
+		$_SESSION['ADMIN_USERNAME']=$username;
+		header('location:categories.php');
+		die();
+	}else{
+		$msg="Please enter correct login details";	
+	}
+	
 }
 ?>
-
 <!doctype html>
 <html class="no-js" lang="">
    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -48,7 +44,7 @@ if(isset($_POST['submit'])) {
                <div class="login-form mt-150">
                   <form method="post">
                      <div class="form-group">
-                        <label>User Name</label>
+                        <label>Username</label>
                         <input type="text" name="username" class="form-control" placeholder="Username" required>
                      </div>
                      <div class="form-group">
@@ -57,9 +53,7 @@ if(isset($_POST['submit'])) {
                      </div>
                      <button type="submit" name="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Sign in</button>
 					</form>
-                    <div class="field_error">
-                    <?php echo $msg ?>
-                 </div>
+					<div class="field_error"><?php echo $msg?></div>
                </div>
             </div>
          </div>
