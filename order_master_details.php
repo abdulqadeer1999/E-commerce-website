@@ -1,15 +1,12 @@
 <?php
 require('top.inc.php');
 
-// if(isset($_GET['type']) && $_GET['type']!=''){
-// 	$type=get_safe_value($con,$_GET['type']);
-// 	if($type=='delete'){
-// 		$id=get_safe_value($con,$_GET['id']);
-// 		$delete_sql="delete from users where id='$id'";
-// 		mysqli_query($con,$delete_sql);
-// 	}
-// }
 $order_id=get_safe_value($con,$_GET['id']);
+
+if(isset($_POST['update_order_status'])){
+    $update_order_status=$_POST['update_order_status'];
+    mysqli_query($con,"update `order` set order_status='$update_order_status' where id='$order_id'");
+}
 
 ?>
 <div class="content pb-0">
@@ -81,7 +78,7 @@ $order_id=get_safe_value($con,$_GET['id']);
                               ?>
 
                               <div>
-                                  <form>
+                                  <form method="post">
                                   <select class="form-control" name="update_order_status">
 										<option>Select Status</option>
 										<?php
@@ -96,7 +93,7 @@ $order_id=get_safe_value($con,$_GET['id']);
 										}
 										?>
 									</select>       
-                                    <input type="submit" class="form_control">                         
+                                    <input type="submit" class="form-control"/>                         
                                   </form>
                               </div>
                
