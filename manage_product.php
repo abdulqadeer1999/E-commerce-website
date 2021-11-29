@@ -92,7 +92,7 @@ if(isset($_POST['submit'])){
 				description='$description',meta_title='$meta_title',
 				meta_desc='$meta_desc',meta_keyword='$meta_keyword',image='$image',best_seller='$best_seller' where id='$id'";
 			}else{
-				$update_sql="update product set categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword','best_seller'='$best_seller' where id='$id'";
+				$update_sql="update product set categories_id='$categories_id',name='$name',mrp='$mrp',price='$price',qty='$qty',short_desc='$short_desc',description='$description',meta_title='$meta_title',meta_desc='$meta_desc',meta_keyword='$meta_keyword',best_seller='$best_seller' where id='$id'";
 			}
 			mysqli_query($con,$update_sql);
 		}else{
@@ -139,9 +139,24 @@ if(isset($_POST['submit'])){
 								<div class="form-group">
 									<label for="categories" class=" form-control-label">Best Seller</label>
 									<select class="form-control" name="best_seller" required>
-										<option value="">Select</option>
-										<option value="1">Yes</option>
-										<option value="0">No</option>
+										<option value=''>Select</option>
+										<?php
+										if($best_seller==1){
+
+											echo '<option value="1" selected>Yes</option>
+											<option value="0">No</option>
+											';
+											
+										}elseif($best_seller==0) {
+											echo '<option value="1" selected>Yes</option>
+											<option value="0" selected>No</option>
+											';
+										}else {
+											echo '<option value="1">Yes</option>
+											<option value="0">No</option>
+											';
+										}
+										?>
 
 									</select>
 								</div>
@@ -182,7 +197,7 @@ if(isset($_POST['submit'])){
 								
 								<div class="form-group">
 									<label for="categories" class=" form-control-label">Meta Description</label>
-									<textarea name="meta_desc" placeholder="Enter product meta description" class="form-control"><?php echo $meta_description?></textarea>
+									<textarea name="meta_desc" placeholder="Enter product meta description" class="form-control"><?php echo $meta_desc?></textarea>
 								</div>
 								
 								<div class="form-group">
